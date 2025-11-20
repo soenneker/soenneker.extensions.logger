@@ -42,6 +42,6 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
-      <PackageReference Include="Soenneker.Extensions.DateTime" Version="4.0.1699" />
+      <PackageReference Include="Soenneker.Extensions.DateTime" Version="4.0.1700" />
     </ItemGroup>
 </Project>
