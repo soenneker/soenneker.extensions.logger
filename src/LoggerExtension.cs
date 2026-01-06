@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Soenneker.Extensions.DateTime;
+﻿using System;
+using Microsoft.Extensions.Logging;
+using Soenneker.Extensions.DateTimeOffsets;
 
 namespace Soenneker.Extensions.Logger;
 
@@ -8,11 +9,16 @@ namespace Soenneker.Extensions.Logger;
 /// </summary>
 public static class LoggerExtension
 {
-    public static void LogStartupInformation(this ILogger logger, System.TimeZoneInfo timeZoneInfo)
+    /// <summary>
+    /// Logs startup information, including the current time in the specified time zone, using the provided logger.
+    /// </summary>
+    /// <param name="logger">The logger instance used to write the startup information messages. Cannot be null.</param>
+    /// <param name="timeZoneInfo">The time zone to use when formatting the current time in the log output. Cannot be null.</param>
+    public static void LogStartupInformation(this ILogger logger, TimeZoneInfo timeZoneInfo)
     {
         logger.LogDebug("----- Startup information -----");
 
-        logger.LogDebug("Current time: {time} ET", System.DateTime.UtcNow.ToTz(timeZoneInfo).ToPreciseFormat());
+        logger.LogDebug("Current time: {time} ET", DateTimeOffset.UtcNow.ToTz(timeZoneInfo).ToPreciseFormat());
 
         logger.LogDebug("----- /Startup information -----");
     }
