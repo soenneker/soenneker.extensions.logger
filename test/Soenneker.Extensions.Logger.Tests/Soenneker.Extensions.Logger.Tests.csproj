@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Extensions.Logger.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Extensions.Logger\Soenneker.Extensions.Logger.csproj" />
     </ItemGroup>
 
     <ItemGroup>
