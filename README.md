@@ -4,10 +4,23 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.logger/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.logger/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.Logger
-### A collection of helpful ILogger extension methods
+A collection of helpful ILogger extension methods.
 
 ## Installation
 
-```
+```bash
 dotnet add package Soenneker.Extensions.Logger
 ```
+
+## Quick start
+
+```csharp
+using Soenneker.Extensions.Logger;
+
+// Given an existing ILogger named logger:
+logger.LogStartupInformation(timeZoneInfo);
+```
+
+## Common operations
+
+- `LogStartupInformation()` - Logs startup information, including the current time in the specified time zone, using the provided logger.
