@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.logger/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.logger/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.Logger
-A collection of helpful ILogger extension methods.
+Writes a compact startup timestamp block through `ILogger`.
 
 ## Installation
 
@@ -12,15 +12,15 @@ A collection of helpful ILogger extension methods.
 dotnet add package Soenneker.Extensions.Logger
 ```
 
-## Quick start
+## Usage
 
 ```csharp
 using Soenneker.Extensions.Logger;
 
-// Given an existing ILogger named logger:
-logger.LogStartupInformation(timeZoneInfo);
+TimeZoneInfo eastern = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+logger.LogStartupInformation(eastern);
 ```
 
-## Common operations
+`LogStartupInformation()` emits three `Debug` messages: an opening marker, the current UTC time converted to the supplied time zone, and a closing marker. The timestamp uses the Soenneker precise date format.
 
-- `LogStartupInformation()` - Logs startup information, including the current time in the specified time zone, using the provided logger.
+The text labels the time as `ET` regardless of which `TimeZoneInfo` is supplied, so pass an Eastern time zone if the label must be accurate. Nothing is written when Debug logging is disabled. Both arguments must be non-null.
