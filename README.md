@@ -17,10 +17,20 @@ dotnet add package Soenneker.Extensions.Logger
 ```csharp
 using Soenneker.Extensions.Logger;
 
-TimeZoneInfo eastern = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-logger.LogStartupInformation(eastern);
+TimeZoneInfo reportingZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+logger.LogStartupInformation(reportingZone);
 ```
 
-`LogStartupInformation()` emits three `Debug` messages: an opening marker, the current UTC time converted to the supplied time zone, and a closing marker. The timestamp uses the Soenneker precise date format.
+`LogStartupInformation()` emits three `Debug` messages:
 
-The text labels the time as `ET` regardless of which `TimeZoneInfo` is supplied, so pass an Eastern time zone if the label must be accurate. Nothing is written when Debug logging is disabled. Both arguments must be non-null.
+```text
+----- Startup information -----
+Current time: <precise local timestamp> (<time-zone ID>)
+----- /Startup information -----
+```
+
+The timestamp is captured in UTC, converted with the supplied `TimeZoneInfo`, and formatted with the Soenneker precise date format. The time-zone ID is logged separately as structured data under `timeZoneId`; the formatted timestamp is stored under `time`.
+
+When Debug logging is disabled, the method returns before capturing or formatting the timestamp. The logger must be non-null. The time zone must be non-null when Debug logging is enabled.
+
+This method reports process startup timing only. It does not log environment names, assembly versions, configuration, machine identity, or health status.

@@ -16,9 +16,12 @@ public static class LoggerExtension
     /// <param name="timeZoneInfo">The time zone to use when formatting the current time in the log output. Cannot be null.</param>
     public static void LogStartupInformation(this ILogger logger, TimeZoneInfo timeZoneInfo)
     {
+        if (!logger.IsEnabled(LogLevel.Debug))
+            return;
+
         logger.LogDebug("----- Startup information -----");
 
-        logger.LogDebug("Current time: {time} ET", DateTimeOffset.UtcNow.ToTz(timeZoneInfo).ToPreciseFormat());
+        logger.LogDebug("Current time: {time} ({timeZoneId})", DateTimeOffset.UtcNow.ToTz(timeZoneInfo).ToPreciseFormat(), timeZoneInfo.Id);
 
         logger.LogDebug("----- /Startup information -----");
     }
